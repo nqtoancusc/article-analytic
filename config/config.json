@@ -1,0 +1,28 @@
+{
+  "development": {
+      "config_id": "development",
+      "app_name": "article_analytic_app",
+      "app_desc": "Article Analytic",
+      "node_port": 3000,
+      "json_indentation": 4,
+      "database": "./data/article_analytics_dev",
+      "database_url": "mongodb://localhost/ArticleAnalyticDB"
+  },
+  "testing": {
+      "config_id": "testing",
+      "database": "./data/article_analytics_test",
+      "database_url": "mongodb://localhost/ArticleAnalyticDB"
+  },
+  "staging": {
+      "config_id": "staging",
+      "node_port": 8080,
+      "database": "./data/article_analytics_stag",
+      "database_url": "mongodb://localhost/ArticleAnalyticDB"
+  },
+  "production": {
+      "config_id": "production",
+      "node_port": 8080,
+      "database": "./data/article_analytics_prod",
+      "database_url": "mongodb://localhost/ArticleAnalyticDB"
+  }
+}

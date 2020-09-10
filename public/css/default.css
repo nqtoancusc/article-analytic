@@ -1,0 +1,33 @@
+main {
+	min-height: 80vh;
+	background-color: #ffffff;
+	padding: 0 2ex 1em 2ex;
+}
+
+header {
+	margin: 0;    
+	min-height: 10vh;
+    background-color: #ffffff;
+	padding: 1em 2ex 2em 2ex;        
+    color: #ffffff;
+    margin-bottom: 2vh;
+	border-bottom: #19A23A solid;
+	color: #19A23A;
+}
+
+.nav-link {
+	color: #19A23A;
+}
+
+footer {
+	margin-bottom: 0;
+	min-height: 6vh;
+	background-color: #19A23A;
+	padding: 1em 2ex 2em 2ex;
+	border-top: solid 1px #999;
+    color: #ffffff;
+}
+
+.hidden { 
+    display: none;
+}

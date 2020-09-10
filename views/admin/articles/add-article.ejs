@@ -1,0 +1,36 @@
+<%- include('../../components/head.ejs') %>
+    </head>
+    <body>
+        <%- include('../../components/header.ejs') %>
+        <div class="container">
+            <main>
+                <form>
+                    <h2>Create new article</h2>
+                    <div class="form-group">
+                        <label for="channel">Select channel</label>
+                        <select class="form-control" id="channel" name="channel">
+                            <option value="">Select channel</option>
+                            <% channels.forEach(function(channel){ %>  
+                                <option value="<%= channel._id %>"><%= channel.name %></option>
+                            <% }); %>
+                        </select>
+                        <div id="channelPrompt" class="alert alert-danger hidden" role="alert">Missing channel</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="articleSourceName">Enter article source name</label>
+                        <input type="text" class="form-control" id="articleSourceName" name="articleSourceName" placeholder="Enter new article source name">
+                        <div id="articleSourceNamePrompt" class="alert alert-danger hidden" role="alert">Missing source name</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="articleSourceURL">Enter article source URL</label>
+                        <input type="text" class="form-control" id="articleSourceURL" name="articleSourceURL" placeholder="Enter new article source URL">
+                        <div id="articleSourceURLPrompt" class="alert alert-danger hidden" role="alert">Invalid URL</div>
+                    </div>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </form>
+            </main>
+        </div>    
+        <%- include('../../components/footer.ejs') %>
+        <script src="../../../js/admin/articles/add-article.js"></script>
+    </body>
+<%- include('../../components/end.ejs') %>

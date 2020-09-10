@@ -1,0 +1,42 @@
+<%- include('../../components/head.ejs') %>
+    </head>
+    <body>
+        <%- include('../../components/header.ejs') %>
+        <div class="container">
+            <main>
+                <form>
+                    <input type="hidden" id="articleId" name="articleId" value="<%= article._id %>">
+                    <h2>Edit article</h2>
+                    <div class="form-group">
+                        <label for="channel">Select channel</label>
+                        <select class="form-control" id="channel" name="channel">
+                            <% channels.forEach(function(channel){ %>  
+                                <% let selectText = (channel.id === article.channel_id) ? 'selected':''  %>
+                                <option value="<%= channel.id %>" <%= selectText %>><%= channel.name %></option>
+                            <% }); %>
+                        </select>
+                        <div id="channelPrompt" class="alert alert-danger hidden" role="alert">Missing channel</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="articleSourceName">Enter article source name</label>
+                        <input type="text" class="form-control" id="articleSourceName" name="articleSourceName" placeholder="Enter new article source name" value="<%= article.source_name %>">
+                        <div id="articleSourceNamePrompt" class="alert alert-danger hidden" role="alert">Missing source name</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="articleSourceURL">Enter article source URL</label>
+                        <input type="text" class="form-control" id="articleSourceURL" name="articleSourceURL" placeholder="Enter new article source URL" value="<%= article.source_url %>">
+                        <input type="hidden" id="hiddenArticleSourceURL" name="hiddenArticleSourceURL" value="<%= article.source_url %>">
+                        <div id="articleSourceURLPrompt" class="alert alert-danger hidden" role="alert">Missing source URL</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="articleSourceURL">Word count</label>
+                        <%= article.word_count %>
+                    </div>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </form>
+            </main>
+        </div>    
+        <%- include('../../components/footer.ejs') %> 
+        <script src="../../../js/admin/articles/article.js"></script>
+    </body>
+<%- include('../../components/end.ejs') %> 

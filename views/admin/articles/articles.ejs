@@ -1,0 +1,54 @@
+<%- include('../../components/head.ejs') %>
+    </head>
+    <body>
+        <%- include('../../components/header.ejs') %>
+        <div class="container">
+            <main>
+                <h2>Manage articles</h2>
+                <p>
+                    <div class="row">
+                        <div class="col-sm">
+                            <a href="/admin/add-article" class="btn btn-success">Create article</a>
+                        </div>
+                        <div class="col-sm">
+                            Filter by word count ranges
+                            <select class="form-control" id="wordCountRange" name="wordCountRange">
+                                <option value="">All</option>
+                                <option value="1">0-99</option>
+                                <option value="2">100-500</option>
+                                <option value="3">501-1000</option>
+                                <option value="4">Over 1000</option>
+                            </select>
+                        </div>
+                    </div>
+                </p>
+                <div class="table-responsive-sm">
+                    <table class="table">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Article Source Name</th>
+                            <th scope="col">Article Source URL</th>
+                            <th scope="col">Word Count</th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody id="article-list">
+                            <% articles.forEach(function(article){ %>
+                                <tr>
+                                    <td><%= article.source_name %></td>
+                                    <td title="<%= article.source_url %>"><%= article.source_url.length <= 50 ? article.source_url : (article.source_url.substring(0, 50) + '...') %></td>
+                                    <td><%= article.word_count %></td>
+                                    <td><a href="/admin/article/<%= article._id %>"><span class="oi oi-pencil"></span></a></td>
+                                    <td><span onClick="deleteArticle('<%= article._id %>')">x</span></td>
+                                </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+        </div>
+        <%- include('../../components/footer.ejs') %>
+        <script src="../../../js/admin/articles/articles.js"></script>
+    </body>
+<%- include('../../components/end.ejs') %> 

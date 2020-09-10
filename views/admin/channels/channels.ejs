@@ -1,0 +1,36 @@
+<%- include('../../components/head.ejs') %>
+    </head>
+    <body>
+        <%- include('../../components/header.ejs') %>
+        <div class="container">
+            <main>
+                <h2>Manage channels</h2>
+                <p>
+                    <a href="/admin/add-channel" class="btn btn-success">Create channel</a>
+                </p>
+                <div class="table-responsive-sm">
+                    <table class="table">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Channel Name</th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <% channels.forEach(function(channel){ %>
+                                <tr>
+                                    <td><%= channel.name %></td>
+                                    <td><a href="/admin/channel/<%= channel._id %>"><span class="oi oi-pencil"></span></a></td>
+                                    <td><span onClick="deleteChannel('<%= channel._id %>')">x</span></td>
+                                </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+        </div>    
+        <%- include('../../components/footer.ejs') %>
+        <script src="../../../js/admin/channels/channels.js"></script>
+    </body>
+<%- include('../../components/end.ejs') %> 

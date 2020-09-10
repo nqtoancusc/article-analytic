@@ -1,0 +1,22 @@
+<%- include('../../components/head.ejs') %>
+    </head>
+    <body>
+        <%- include('../../components/header.ejs') %>
+        <div class="container">
+            <main>
+                <form>
+                    <h2>Edit channel</h2>
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" id="channelId" name="channelId" value="<%= channel._id %>">
+                        <label for="channelName">Enter new channel name</label>
+                        <input type="text" class="form-control" id="channelName" name="channelName" placeholder="Enter new channel name" value="<%= channel.name %>">
+                        <div id="channelNamePrompt" class="alert alert-danger hidden" role="alert">Missing channel name</div>
+                    </div>
+                    <button type="submit" class="btn btn-success">Save</button>
+                </form>
+            </main>
+        </div>    
+        <%- include('../../components/footer.ejs') %>
+        <script src="../../../js/admin/channels/channel.js"></script>
+    </body>
+<%- include('../../components/end.ejs') %> 
