@@ -19,7 +19,7 @@ exports.getArticle = (req, res, next) => {
   const articleId = req.params.id
   Article.findById(articleId)
     .then(article => {
-      Channel.findAll()
+      Channel.fetchAll()
         .then(channels => {
           res.render('admin/articles/article', {
             channels: channels,

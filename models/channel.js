@@ -4,7 +4,9 @@ const getDb = require('../utils/database').getDb;
 class Channel {
 	constructor(name, id) {
 		this.name = name;
-		this._id = new mongodb.ObjectId(id);
+		if (id) {
+			this._id = new mongodb.ObjectId(id);
+		}
 	}
 
 	save() {

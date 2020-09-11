@@ -11,8 +11,8 @@
                         <label for="channel">Select channel</label>
                         <select class="form-control" id="channel" name="channel">
                             <% channels.forEach(function(channel){ %>  
-                                <% let selectText = (channel.id === article.channel_id) ? 'selected':''  %>
-                                <option value="<%= channel.id %>" <%= selectText %>><%= channel.name %></option>
+                                <% let selectText = (channel._id === article.channel_id) ? 'selected':''  %>
+                                <option value="<%= channel._id %>" <%= selectText %>><%= channel.name %></option>
                             <% }); %>
                         </select>
                         <div id="channelPrompt" class="alert alert-danger hidden" role="alert">Missing channel</div>

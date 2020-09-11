@@ -7,7 +7,9 @@ class Article {
 		this.source_name = source_name;
 		this.source_url = source_url;
 		this.word_count = word_count;
-		this._id = new mongodb.ObjectId(id);
+		if (id) {
+			this._id = new mongodb.ObjectId(id);
+		}
 	}
 
 	save() {
