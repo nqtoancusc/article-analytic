@@ -7,9 +7,7 @@ const Channel = require('../models/channel');
 const MongoClient = mongodb.MongoClient;
 
 mongoConnect(() => {
-	app.listen(config.node_port, function (req, res) {
-	 		console.log(`${config.app_name} listening on port ${config.node_port}`);
-		})
+
 });
 
 describe('Model', function () {
