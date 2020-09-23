@@ -2,9 +2,13 @@ const path = require('path');
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const { graphqlHTTP } = require('express-graphql');
 const config = require('./config/config.js');
 
 const mongoConnect = require('./utils/database').mongoConnect;
+
+const graphqlSchema = require('./graphql/schema');
+const graphqlResolver = require('./graphql/resolvers');
 
 const webbrowseRoutes = require('./routes/webbrowse');
 const adminRoutes = require('./routes/admin');
@@ -22,6 +26,12 @@ app.set('views','views');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('/graphql', graphqlHTTP({
+		schema: graphqlSchema,
+		rootValue: graphqlResolver
+	}),
+);
 
 app.use('/', webbrowseRoutes);
 app.use('/admin', adminRoutes);

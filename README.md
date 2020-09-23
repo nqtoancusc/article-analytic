@@ -4,6 +4,10 @@ Project Name: Article Analytic
 
 NodeJS, ES6, EJS template engine, Bootstrap 4, MongoDB, Docker
 
+## Install graphql and express-graphql
+
+npm install --save graphql express-graphql
+
 ## Deployment to AWS EC2 instance:
 
 The live version of my solution is now up and running, and it can be found at http://support.toannotes.com/. To deploy this website, my EC2 instance needs to have Apache2 (proxy and proxy_http modes are enabled), Node (v10.18.1) and Forever installed.
