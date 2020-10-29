@@ -1,5 +1,6 @@
 const config = require('../config/config.js');
 
+// Used in channel and article
 const mongodb = require('mongodb');
 const MongoClient = mongodb.MongoClient;
 

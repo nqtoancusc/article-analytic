@@ -6,7 +6,11 @@ NodeJS, ES6, EJS template engine, Bootstrap 4, MongoDB, Docker
 
 ## Install graphql and express-graphql
 
+npm install jsonwebtoken --save
 npm install --save graphql express-graphql
+npm install --save mongoose
+npm i bcryptjs
+npm install --save validator
 
 ## Deployment to AWS EC2 instance:
 
