@@ -4,7 +4,7 @@
         <%- include('../../components/header.ejs') %>
         <div class="container">
             <main>
-                <form>
+                <form method="POST" enctype="multipart/form-data">
                     <input type="hidden" id="articleId" name="articleId" value="<%= article._id %>">
                     <h2>Edit article</h2>
                     <div class="form-group">
@@ -27,6 +27,10 @@
                         <input type="text" class="form-control" id="articleSourceURL" name="articleSourceURL" placeholder="Enter new article source URL" value="<%= article.source_url %>">
                         <input type="hidden" id="hiddenArticleSourceURL" name="hiddenArticleSourceURL" value="<%= article.source_url %>">
                         <div id="articleSourceURLPrompt" class="alert alert-danger hidden" role="alert">Missing source URL</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="image">Choose an image</label>
+                        <input type="file" id="image" name="image">
                     </div>
                     <div class="form-group">
                         <label for="articleSourceURL">Word count</label>

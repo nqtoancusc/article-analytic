@@ -1,8 +1,8 @@
-const config = require('../config/config.js');
+//const config = require('../config/config.js');
 
 // Move this to database.js file //
 const mongoose = require('mongoose');
-mongoose.connect(config.database_url, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.MONGO_DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true });
 //------------------------------//
 
 const Schema = mongoose.Schema;

@@ -8,6 +8,15 @@ form.addEventListener('submit', function(e) {
     let articleSourceName = inputs[1].value || '';
     let articleSourceURL = inputs[2].value || '';
     let hiddenArticleSourceURL = inputs[3].value || '';
+
+    imageInput = inputs[4];
+    const formData = new FormData();
+    formData.append("article_id", articleId);
+    formData.append("channel_id", channelId);
+    formData.append("source_name", articleSourceName);
+    formData.append("source_url", articleSourceURL);
+    formData.append("image", imageInput.files[0]);
+
     if (channelId === '') {
         let promptElementChannel = document.getElementById('channelPrompt');
         promptElementChannel.style.display = "block";
@@ -60,22 +69,35 @@ form.addEventListener('submit', function(e) {
                 article_id: articleId,
                 channel_id: channelId,
                 source_name: articleSourceName,
-                source_url: articleSourceURL
+                source_url: articleSourceURL,
+                image: image
             };
             fetch('/api/update-article', {
                     method: 'POST',
-                    body: JSON.stringify(postArticleData),
+                    body: formData, //JSON.stringify(postArticleData),
                     headers: {
-                        'Content-type': 'application/json; charset=UTF-8'
+                        //'Content-type': 'application/json; charset=UTF-8'
+                        //"Content-Type": "multipart/form-data"
                     }
             })
             .then(response => response.json())
             .then(json => {
                 console.log(json);
                 if (json.message === 'success') {
-                    window.location.replace("/admin/articles");
+                    //window.location.replace("/admin/articles");
                 }
             });
         }
     });
 })
+
+function getBase64Image(imgElem) {
+    // imgElem must be on the same server otherwise a cross-origin error will be thrown "SECURITY_ERR: DOM Exception 18"
+    var canvas = document.createElement("canvas");
+    canvas.width = imgElem.clientWidth;
+    canvas.height = imgElem.clientHeight;
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(imgElem, 0, 0);
+    var dataURL = canvas.toDataURL("image/png");
+    return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+}

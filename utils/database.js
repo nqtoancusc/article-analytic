@@ -1,5 +1,3 @@
-const config = require('../config/config.js');
-
 // Used in channel and article
 const mongodb = require('mongodb');
 const MongoClient = mongodb.MongoClient;
@@ -7,7 +5,7 @@ const MongoClient = mongodb.MongoClient;
 let _db;
 
 const mongoConnect = callback => {
-	MongoClient.connect(config.database_url, { useNewUrlParser: true, useUnifiedTopology: true })
+	MongoClient.connect(process.env.MONGO_DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true })
 		.then(client => {
 			console.log('Connected to Mongo DB');
 			_db = client.db(); // store the running database connection.

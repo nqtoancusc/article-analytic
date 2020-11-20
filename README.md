@@ -4,6 +4,17 @@ Project Name: Article Analytic
 
 NodeJS, ES6, EJS template engine, Bootstrap 4, MongoDB, Docker
 
+## Start mongodb if it has not started yet
+
+brew services start/restart mongodb-community
+
+Run mongo from terminal:
+mongo
+
+## Folder in S3: project-article-analytic
+
+https://s3.console.aws.amazon.com/s3/buckets/project-article-analytic?region=eu-north-1&tab=objects
+
 ## Install graphql and express-graphql
 
 npm install jsonwebtoken --save
@@ -11,6 +22,11 @@ npm install --save graphql express-graphql
 npm install --save mongoose
 npm i bcryptjs
 npm install --save validator
+npm install --save aws-sdk
+npm install --save multer
+
+## Run:
+npm run start:dev
 
 ## Deployment to AWS EC2 instance:
 

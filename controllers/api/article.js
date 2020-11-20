@@ -62,19 +62,61 @@ exports.postAddArticle = (req, res, next) => {
     const source_name = req.body.source_name;
     const source_url = req.body.source_url;
     const word_count = req.body.word_count;
-    const article = new Article(channel_id, source_name, source_url, word_count);
-    article
-        .save()
-        .then(result => {
-            res.json({
-                "message": "success",
-                "result": result
-            });
-        }).catch(err => {
-            console.log(err);
-            res.status(400).json({"error": err.message})
-            return;
-        });
+
+    const image = req.file;
+    const image_path = image.path;
+    console.log(`Image Path: ${image_path}`);
+    console.log(`Source URL: ${req.body.source_url}`);
+    const AWS = require('aws-sdk');
+    const fs = require('fs');
+    const path = require('path');
+    
+    AWS.config.update({
+        region: process.env.AWS_S3_REGION,
+        accessKeyId: process.env.S3_ACCESS_KEY,
+        secretAccessKey: process.env.S3_SECRET_KEY
+    });
+    
+    const s3 = new AWS.S3({apiVersion: '2006-03-01'});
+
+    // call S3 to retrieve upload file to specified bucket
+    const uploadParams = {Bucket: process.env.AWS_S3_BUCKET, Key: '', Body: '', ACL: 'public-read'};
+    const file = image_path;
+
+    // Configure the file stream and obtain the upload parameters
+    const fileStream = fs.createReadStream(file);
+    fileStream.on('error', (err) => {
+        console.log('File Error', err);
+        res.status(400).json({"error":err.message});
+    });
+    uploadParams.Body = fileStream;
+    
+    uploadParams.Key = path.basename(file);
+
+    // call S3 to retrieve upload file to specified bucket
+    console.log('Start Uploading');
+    s3.upload (uploadParams, (err, data) => {
+        if (err) {
+            console.log("Error", err);
+            res.status(400).json({"error":err.message});
+        } if (data) {
+            console.log("Upload Success", data.Location);
+            const image_url = `https://${process.env.AWS_S3_BUCKET}.s3.${process.env.AWS_S3_REGION}.amazonaws.com/${data.Location}`;
+            const article = new Article(channel_id, source_name, source_url, word_count, image_url);
+            article
+                .save()
+                .then(result => {
+                    res.json({
+                        "message": "success",
+                        "result": result
+                    });
+                }).catch(err => {
+                    console.log(err);
+                    res.status(400).json({"error": err.message})
+                    return;
+                });
+        }
+    });
 };
 
 exports.postUpdateArticle = (req, res, next) => {
@@ -83,20 +125,61 @@ exports.postUpdateArticle = (req, res, next) => {
     const source_url = req.body.source_url;
     const channel_id = req.body.channel_id;
     const word_count = 0;
-   	const article = new Article(channel_id, source_name, source_url, word_count, article_id);
 
-    article
-        .save()
-        .then(article => {
-            res.json({
-                "message": "success",
-                "article": article
-            })
-        }).catch(err => {
-            console.log(err);
+    const image = req.file;
+    const image_path = image.path;
+    console.log(`Image Path: ${image_path}`);
+    console.log(`Source URL: ${req.body.source_url}`);
+    const AWS = require('aws-sdk');
+    const fs = require('fs');
+    const path = require('path');
+    
+    AWS.config.update({
+        region: process.env.AWS_S3_REGION,
+        accessKeyId: process.env.S3_ACCESS_KEY,
+        secretAccessKey: process.env.S3_SECRET_KEY
+    });
+    
+    const s3 = new AWS.S3({apiVersion: '2006-03-01'});
+
+    // call S3 to retrieve upload file to specified bucket
+    const uploadParams = {Bucket: process.env.AWS_S3_BUCKET, Key: '', Body: '', ACL: 'public-read'};
+    const file = image_path;
+
+    // Configure the file stream and obtain the upload parameters
+    const fileStream = fs.createReadStream(file);
+    fileStream.on('error', (err) => {
+        console.log('File Error', err);
+        res.status(400).json({"error":err.message});
+    });
+    uploadParams.Body = fileStream;
+    
+    uploadParams.Key = path.basename(file);
+
+    // call S3 to retrieve upload file to specified bucket
+    console.log('Start Uploading');
+    s3.upload (uploadParams, (err, data) => {
+        if (err) {
+            console.log("Error", err);
             res.status(400).json({"error":err.message});
-            return;
-        });
+        } if (data) {
+            console.log("Upload Success", data.Location);
+            const image_url = `https://${process.env.AWS_S3_BUCKET}.s3.${process.env.AWS_S3_REGION}.amazonaws.com/${data.Location}`;
+            const article = new Article(channel_id, source_name, source_url, word_count, article_id, image_url);
+            article
+                .save()
+                .then(article => {
+                    res.json({
+                        "message": "success",
+                        "article": article
+                    })
+                }).catch(err => {
+                    console.log(err);
+                    res.status(400).json({"error":err.message});
+                    return;
+                });
+        }
+    });
 };
 
 exports.postDeleteArticle = (req, res, next) => {

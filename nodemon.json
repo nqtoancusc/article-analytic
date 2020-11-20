@@ -1,0 +1,11 @@
+{
+    "env": {
+        "NODE_PORT": 3000,
+        "DATABASE": "./data/article_analytics_dev",
+        "MONGO_DATABASE_URL": "mongodb://localhost/ArticleAnalyticDB",
+        "AWS_S3_BUCKET": "project-article-analytic",
+        "S3_ACCESS_KEY": "AKIAU5LXHE2TJEGG3FXU",
+        "S3_SECRET_KEY": "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",
+        "AWS_S3_REGION": "eu-north-1"
+    }
+}

@@ -37,7 +37,11 @@
                             <% articles.forEach(function(article){ %>
                                 <tr>
                                     <td><%= article.source_name %></td>
+                                    <% if (article.source_url) { %>
                                     <td title="<%= article.source_url %>"><%= article.source_url.length <= 50 ? article.source_url : (article.source_url.substring(0, 50) + '...') %></td>
+                                    <% } else { %>
+                                    <td></td>
+                                    <% } %>
                                     <td><%= article.word_count %></td>
                                     <td><a href="/admin/article/<%= article._id %>"><span class="oi oi-pencil"></span></a></td>
                                     <td><span onClick="deleteArticle('<%= article._id %>')">x</span></td>

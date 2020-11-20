@@ -2,11 +2,12 @@ const mongodb = require('mongodb');
 const getDb = require('../utils/database').getDb;
 
 class Article {
-	constructor(channel_id, source_name, source_url, word_count, id) {
+	constructor(channel_id, source_name, source_url, word_count, image_url, id) {
 		this.channel_id = channel_id;
 		this.source_name = source_name;
 		this.source_url = source_url;
 		this.word_count = word_count;
+		this.image_url = image_url;
 		if (id) {
 			this._id = new mongodb.ObjectId(id);
 		}
