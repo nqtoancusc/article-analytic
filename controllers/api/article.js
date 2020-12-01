@@ -4,6 +4,31 @@ const Channel = require('../../models/article');
 const helper = require('../../utils/helper.js');
 const Article = require('../../models/article');
 
+const Shopify = require('shopify-api-node');
+
+exports.testShopify = (req, res, next) => {
+
+
+        const shopify = new Shopify({
+            shopName: "nordic-morning.myshopify.com",
+            apiKey: "9c4623d812d150083cdcd2185a746341",
+            password: "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"
+        });
+
+        const params = { email: "toan.nguyen@nordicmorning.com", password: "one@connection" };
+        shopify.customer.create(params).then(r => {
+            console.log(r);
+            res.json({
+                "message":"success"
+            })
+        }).catch(err => {
+            console.log(err);
+            res.status(400).json({"error":err.message});
+            return;
+        });
+
+};
+
 exports.getArticles = (req, res, next) => {
     Article.fetchAll()
         .then(articles => {

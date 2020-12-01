@@ -18,4 +18,7 @@ router.post('/get-article-by-source-url', apiArticleController.postGetArticleByS
 router.post('/filter-articles', apiArticleController.postFilterArticlesByWordCountRangeId);
 router.get('/articles', apiArticleController.getArticles);
 
+router.get('/test-shopify', apiArticleController.testShopify);
+
+
 module.exports = router;

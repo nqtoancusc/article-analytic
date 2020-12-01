@@ -9,7 +9,7 @@
   },
   "scripts": {
     "test": "mocha",
-    "start": "",
+    "start": "NODE_ENV=production NODE_PORT=3000 AWS_S3_BUCKET=project-article-analytic S3_ACCESS_KEY=AKIAU5LXHE2TJEGG3FXU S3_SECRET_KEY=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 MONGO_DATABASE_URL=mongodb://localhost/ArticleAnalyticDB PAGINATION_RECORD_PER_PAGE=2 node server.js",
     "start-server": "node server.js",
     "start:dev": "nodemon server.js"
   },
@@ -39,6 +39,7 @@
     "nodemon": "^2.0.4",
     "npm": "^6.14.8",
     "request": "^2.88.2",
+    "shopify-api-node": "^3.5.3",
     "sqlite3": "^4.2.0",
     "validator": "^13.1.17"
   }

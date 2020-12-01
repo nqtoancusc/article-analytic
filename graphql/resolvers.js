@@ -96,6 +96,7 @@ module.exports = {
             email: user.email 
         };
     },
+
     createPost: async function({ postInput }, req) {
         // If middleware set isAuth to false. It means user is not authenticated.
         if (!req.isAuth) {
@@ -147,6 +148,7 @@ module.exports = {
             updatedAt: createdPost.updatedAt.toISOString()
         };
     },
+
     posts: async function({page}, req) {
         // If middleware set isAuth to false. It means user is not authenticated.
         if (!req.isAuth) {
@@ -160,7 +162,7 @@ module.exports = {
             page = 1;
         }
 
-        const perPage = 2;
+        const perPage = process.env.PAGINATION_RECORD_PER_PAGE;
         const totalPosts = await Post.find().countDocuments();
         const posts = await Post.find()
             .sort({ createdAt: -1})
